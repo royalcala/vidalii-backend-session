@@ -1,0 +1,28 @@
+{
+  "name": "@vidalii/backend-session",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royalcala/vidalii-backend-session.git"
+  },
+  "keywords": [
+    "vidalii-backend"
+  ],
+  "author": {
+    "name": "Roy Alcala Ortiz",
+    "email": "alcala.rao@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/royalcala/vidalii-backend-session/issues"
+  },
+  "homepage": "https://github.com/royalcala/vidalii-backend-session#readme",
+  "dependencies": {
+    "@vidalii/backend":"^0.0.25"
+  }
+}
