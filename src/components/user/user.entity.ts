@@ -1,7 +1,7 @@
 import { orm, api, val, ObjectId } from "@vidalii/backend";
 
 
-@api.InputType()
+@api.InputType('UserInsert')
 @orm.Entity()
 export class user {
     @orm.PrimaryKey()
@@ -19,11 +19,13 @@ export class user {
     lastname: String
 
     @val.IsEmail({}, { message: 'your email is incorrect' })
+    @api.Field()
     @orm.Property()
     email: String
 
 
     @val.IsPhoneNumber('MX', { message: `Your phone number is incorrect` })
+    @api.Field()
     @orm.Property()
     phone: String
 }

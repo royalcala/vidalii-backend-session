@@ -1,0 +1,97 @@
+{
+  "data": {
+    "propertyOrder": {},
+    "properties": {
+      "_id": {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "String"
+      },
+      "name": {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      "lastname": {
+        "name": "lastname",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      "email": {
+        "name": "email",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      "phone": {
+        "name": "phone",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      }
+    },
+    "props": [
+      {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "String"
+      },
+      {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      {
+        "name": "lastname",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      {
+        "name": "email",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      },
+      {
+        "name": "phone",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      }
+    ],
+    "primaryKeys": [
+      "_id"
+    ],
+    "filters": {},
+    "hooks": {},
+    "indexes": [],
+    "uniques": [],
+    "className": "user",
+    "path": "./src/components/user/user.entity.ts",
+    "name": "user",
+    "abstract": false,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "useCache": true,
+    "compositePK": false,
+    "relations": [],
+    "collection": "user"
+  },
+  "origin": "./src/components/user/user.entity.ts",
+  "hash": "7b975780a2c7e81547c3bf40659067ae",
+  "version": "4.4.4"
+}
