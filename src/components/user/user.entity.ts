@@ -10,21 +10,21 @@ export class user {
     @val.MaxLength(20, {
         message: 'name is too big',
     })
-    @api.Field()
+    @api.Field({ nullable: false })
     @orm.Property()
     name: String
 
-    @api.Field()
+    @api.Field({ nullable: false })
     @orm.Property()
     lastname: String
 
     @val.IsEmail({}, { message: 'your email is incorrect' })
-    @api.Field()
+    @api.Field({ nullable: false })
     @orm.Property()
     email: String
 
     @val.IsPhoneNumber('MX', { message: `Your phone number is incorrect` })
-    @api.Field()
+    @api.Field({ nullable: false })
     @orm.Property()
-    phone: String    
+    phone: String
 }

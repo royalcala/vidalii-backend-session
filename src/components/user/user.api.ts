@@ -1,35 +1,37 @@
-import { api, Context, orm, val } from "@vidalii/backend";
+import { api, Context, orm, val, getDataLoader } from "@vidalii/backend";
+import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
+import { AnyEntity, EntityName } from "@vidalii/backend/dist/vidalii.orm";
 import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
 
-
-//TODO extends Version Entity And ObjectType
 
 
 @api.ObjectType()
 export class User implements Partial<UserEntity>{
     @api.Field(type => String)
-    _id: String;
+    _id: string;
 
     @api.Field()
-    name: String;
+    name: string;
 
     @api.Field()
-    lastname: String
+    lastname: string
 
     @api.Field()
-    email: String;
+    email: string;
 
     @api.Field()
-    phone: String
+    phone: string
 
     @api.Field(type => UserVersion, { nullable: true })
     async version(
         @api.Ctx() context: Context
     ) {
-        //TODO get user created in context
-        //TODO here read       
-        const version = await context.em.findOne(UserVersion, this._id as any)
+        //TODO dataloader implementation getDataloder(id,context)
+        const dataLoader = getDataLoader(UserVersion, 'User.version', '_id_doc', context)
+        // const version = await context.em.findOne(UserVersion, this._id as any)
+        return dataLoader.load(this._id)
+        // return version
     }
 }
 
@@ -65,9 +67,12 @@ export class UserUpdate implements Omit<UserEntity, '_id'>{
 export class UserResolver {
     @api.Query(returns => [User])
     async UserFind(
+        @api.Arg('operators', () => JsonScalar)
+        operators: Object,
         @api.Ctx() context: Context
     ) {
-        return context.em.find(UserEntity, {})
+
+        return context.em.find(UserEntity, operators)
     }
     @api.Mutation(returns => User)
     async UserInsert(
@@ -76,8 +81,7 @@ export class UserResolver {
     ) {
         context.em.persist(user)
         //TODO id_session_HERE
-        UserVersion.persist(user._id, 'id_session_HERE',context)
-        user._id
+        UserVersion.insert(user._id, 'id_session_HERE', context)
         return user
     }
 

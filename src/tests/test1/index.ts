@@ -4,17 +4,18 @@ import { VidaliiService, fetch } from "@vidalii/backend";
 import Path from "path";
 import { User } from "../../components/user/user.api";
 const host = 'localhost'
-const port = 4003
+const port = 4009
 const endpoint = `http://${host}:${port}/graphql`
 
-describe('user.api',
+describe('TESTING',
   () => {
 
     it('start service', async () => {
       await VidaliiService.start({
         INPUT: Path.resolve('.') + '/src/components/**/*',
         DB_PATH: Path.resolve('.') + '/src/tests/test1',
-        PORT: port
+        PORT: port,
+        DEBUG:true
       })
     })
     let userInserted: User
@@ -36,7 +37,6 @@ describe('user.api',
       console.log(userInserted)
       expect(typeof userInserted._id).to.equal('string');
     })
-
     it('update  user', async () => {
       const query = fetch.gql`#graphql
      mutation userUpdate{
@@ -50,8 +50,7 @@ describe('user.api',
           }
 }
       `
-      const response = await fetch.request(endpoint, query)
-      console.log(response)
+      const response = await fetch.request(endpoint, query)      
       expect(true).to.equal(true);
     })
 
@@ -60,7 +59,7 @@ describe('user.api',
 
     })
 
-    after(async function () {
-      await VidaliiService.stop()
-    });
+    // after(async function () {
+    //   await VidaliiService.stop()
+    // });
   })

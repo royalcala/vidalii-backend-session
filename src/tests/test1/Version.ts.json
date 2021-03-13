@@ -5,8 +5,7 @@
       "_id_doc": {
         "name": "_id_doc",
         "reference": "scalar",
-        "getter": false,
-        "setter": false,
+        "primary": true,
         "type": "String"
       },
       "id_user_created": {
@@ -14,36 +13,39 @@
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "String",
+        "nullable": true
       },
       "date_created": {
         "name": "date_created",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "number"
+        "type": "number",
+        "nullable": true
       },
       "id_user_updated": {
         "name": "id_user_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "String",
+        "nullable": true
       },
       "date_updated": {
         "name": "date_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "number"
+        "type": "number",
+        "nullable": true
       }
     },
     "props": [
       {
         "name": "_id_doc",
         "reference": "scalar",
-        "getter": false,
-        "setter": false,
+        "primary": true,
         "type": "String"
       },
       {
@@ -51,46 +53,51 @@
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "String",
+        "nullable": true
       },
       {
         "name": "date_created",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "number"
+        "type": "number",
+        "nullable": true
       },
       {
         "name": "id_user_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "String",
+        "nullable": true
       },
       {
         "name": "date_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "number"
+        "type": "number",
+        "nullable": true
       }
     ],
-    "primaryKeys": [],
+    "primaryKeys": [
+      "_id_doc"
+    ],
     "filters": {},
     "hooks": {},
     "indexes": [],
     "uniques": [],
     "className": "Version",
     "path": "./src/components/version/version.entity.ts",
-    "name": "Version",
-    "abstract": false,
+    "abstract": true,
     "constructorParams": [],
     "toJsonParams": [],
     "useCache": true,
-    "relations": [],
-    "collection": "version"
+    "compositePK": false,
+    "relations": []
   },
   "origin": "./src/components/version/version.entity.ts",
-  "hash": "0fabefe27d25de01adeabee12b4e72e0",
+  "hash": "021dc316007d11abe2dd6cfc3760f515",
   "version": "4.4.4"
 }
