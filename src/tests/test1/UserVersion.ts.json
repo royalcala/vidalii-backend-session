@@ -1,0 +1,25 @@
+{
+  "data": {
+    "propertyOrder": {},
+    "properties": {},
+    "props": [],
+    "primaryKeys": [],
+    "filters": {},
+    "hooks": {},
+    "indexes": [],
+    "uniques": [],
+    "className": "UserVersion",
+    "path": "./src/components/user/user.version.entity.ts",
+    "name": "UserVersion",
+    "abstract": false,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "extends": "Version",
+    "useCache": true,
+    "relations": [],
+    "collection": "user_version"
+  },
+  "origin": "./src/components/user/user.version.entity.ts",
+  "hash": "300f82ef41ea5c143b43a1650302807e",
+  "version": "4.4.4"
+}

@@ -54,7 +54,13 @@ describe('user.api',
       console.log(response)
       expect(true).to.equal(true);
     })
-    // after(async function () {
-    //   await VidaliiService.stop()
-    // });
+
+    it('sigin user', async () => {
+
+
+    })
+
+    after(async function () {
+      await VidaliiService.stop()
+    });
   })

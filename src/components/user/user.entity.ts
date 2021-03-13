@@ -23,9 +23,8 @@ export class user {
     @orm.Property()
     email: String
 
-
     @val.IsPhoneNumber('MX', { message: `Your phone number is incorrect` })
     @api.Field()
     @orm.Property()
-    phone: String
+    phone: String    
 }

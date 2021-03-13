@@ -2,96 +2,95 @@
   "data": {
     "propertyOrder": {},
     "properties": {
-      "_id": {
-        "name": "_id",
-        "reference": "scalar",
-        "primary": true,
-        "type": "String"
-      },
-      "name": {
-        "name": "name",
+      "_id_doc": {
+        "name": "_id_doc",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
-      "lastname": {
-        "name": "lastname",
+      "id_user_created": {
+        "name": "id_user_created",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
-      "email": {
-        "name": "email",
+      "date_created": {
+        "name": "date_created",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number"
+      },
+      "id_user_updated": {
+        "name": "id_user_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
-      "phone": {
-        "name": "phone",
+      "date_updated": {
+        "name": "date_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "number"
       }
     },
     "props": [
       {
-        "name": "_id",
-        "reference": "scalar",
-        "primary": true,
-        "type": "String"
-      },
-      {
-        "name": "name",
+        "name": "_id_doc",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
       {
-        "name": "lastname",
+        "name": "id_user_created",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
       {
-        "name": "email",
+        "name": "date_created",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number"
+      },
+      {
+        "name": "id_user_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
         "type": "String"
       },
       {
-        "name": "phone",
+        "name": "date_updated",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "number"
       }
     ],
-    "primaryKeys": [
-      "_id"
-    ],
+    "primaryKeys": [],
     "filters": {},
     "hooks": {},
     "indexes": [],
     "uniques": [],
-    "className": "user",
-    "path": "./src/components/user/user.entity.ts",
-    "name": "user",
+    "className": "Version",
+    "path": "./src/components/version/version.entity.ts",
+    "name": "Version",
     "abstract": false,
     "constructorParams": [],
     "toJsonParams": [],
     "useCache": true,
-    "compositePK": false,
     "relations": [],
-    "collection": "user"
+    "collection": "version"
   },
-  "origin": "./src/components/user/user.entity.ts",
-  "hash": "4b6051b729c78881fea9bf669240d5fc",
+  "origin": "./src/components/version/version.entity.ts",
+  "hash": "0fabefe27d25de01adeabee12b4e72e0",
   "version": "4.4.4"
 }
