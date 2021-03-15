@@ -1,16 +1,29 @@
 import { orm, api, val, ObjectId } from "@vidalii/backend";
 
 
-@api.InputType('SessionInsert')
+
 @orm.Entity()
 export class session {
-    @orm.PrimaryKey()
-    _id: string = new ObjectId().toHexString()
+    login(id_user) {
+        this._id = new ObjectId().toHexString()
+        this.id_user = id_user
+        this.time_login = new Date().getTime()
+        return this
+    }
+    logout(_id) {
 
-    @val.MaxLength(20, {
-        message: 'name is too big',
-    })
-    @api.Field()
+    }
+    @orm.PrimaryKey()
+    _id: string
+
+    @orm.Index()
     @orm.Property()
-    name: String
+    id_user?: string
+
+    @orm.Property()
+    time_login?: number
+
+    @orm.Property()
+    time_logout?: number
+
 }

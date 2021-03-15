@@ -29,8 +29,9 @@ export class Version {
         version._id_doc = _id_doc
         version.id_user_created = id_user_created
         context.em.persist(version)
+        return version
     }
-    static update(_id_doc: String, id_cuser_udpated: String, context: Context) {
+    static update(_id_doc: String, id_user_updated: String, context: Context) {
 
     }
 }

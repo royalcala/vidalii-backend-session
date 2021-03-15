@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/royalcala/vidalii-backend-session#readme",
   "dependencies": {
-    "@vidalii/backend": "^0.0.25"
+    "@vidalii/backend": "^0.0.25",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",

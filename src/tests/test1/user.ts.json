@@ -6,35 +6,42 @@
         "name": "_id",
         "reference": "scalar",
         "primary": true,
-        "type": "String"
+        "type": "string"
       },
       "name": {
         "name": "name",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       "lastname": {
         "name": "lastname",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       "email": {
         "name": "email",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       "phone": {
         "name": "phone",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
+      },
+      "password": {
+        "name": "password",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
       }
     },
     "props": [
@@ -42,35 +49,42 @@
         "name": "_id",
         "reference": "scalar",
         "primary": true,
-        "type": "String"
+        "type": "string"
       },
       {
         "name": "name",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       {
         "name": "lastname",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       {
         "name": "email",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
       },
       {
         "name": "phone",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string"
+      },
+      {
+        "name": "password",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
       }
     ],
     "primaryKeys": [
@@ -92,6 +106,6 @@
     "collection": "user"
   },
   "origin": "./src/components/user/user.entity.ts",
-  "hash": "e16f461651241a3bc0a3a2ab1527b568",
+  "hash": "0c0e95cb6a9466d7942b3f6a6e3e0d82",
   "version": "4.4.4"
 }

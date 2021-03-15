@@ -5,26 +5,31 @@ import { orm, api, val, ObjectId } from "@vidalii/backend";
 @orm.Entity()
 export class user {
     @orm.PrimaryKey()
-    _id: String = new ObjectId().toHexString()
+    _id: string = new ObjectId().toHexString()
 
     @val.MaxLength(20, {
         message: 'name is too big',
     })
     @api.Field({ nullable: false })
     @orm.Property()
-    name: String
+    name: string
 
     @api.Field({ nullable: false })
     @orm.Property()
-    lastname: String
+    lastname: string
 
     @val.IsEmail({}, { message: 'your email is incorrect' })
     @api.Field({ nullable: false })
     @orm.Property()
-    email: String
+    email: string
 
     @val.IsPhoneNumber('MX', { message: `Your phone number is incorrect` })
     @api.Field({ nullable: false })
     @orm.Property()
-    phone: String
+    phone: string
+
+    // @val.IsHash()
+    @api.Field({ nullable: false })
+    @orm.Property()
+    password: string
 }

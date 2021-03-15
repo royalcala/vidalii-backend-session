@@ -8,12 +8,29 @@
         "primary": true,
         "type": "string"
       },
-      "name": {
-        "name": "name",
+      "id_user": {
+        "name": "id_user",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string",
+        "nullable": true
+      },
+      "time_login": {
+        "name": "time_login",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
+      },
+      "time_logout": {
+        "name": "time_logout",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
       }
     },
     "props": [
@@ -24,11 +41,28 @@
         "type": "string"
       },
       {
-        "name": "name",
+        "name": "id_user",
         "reference": "scalar",
         "getter": false,
         "setter": false,
-        "type": "String"
+        "type": "string",
+        "nullable": true
+      },
+      {
+        "name": "time_login",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
+      },
+      {
+        "name": "time_logout",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
       }
     ],
     "primaryKeys": [
@@ -36,7 +70,11 @@
     ],
     "filters": {},
     "hooks": {},
-    "indexes": [],
+    "indexes": [
+      {
+        "properties": "id_user"
+      }
+    ],
     "uniques": [],
     "className": "session",
     "path": "./src/components/session/session.entity.ts",
@@ -50,6 +88,6 @@
     "collection": "session"
   },
   "origin": "./src/components/session/session.entity.ts",
-  "hash": "702926ca04ec133c50130d95bcbbd282",
+  "hash": "0938da211dc1d86634515ae19a852b3d",
   "version": "4.4.4"
 }

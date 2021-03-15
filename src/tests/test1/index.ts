@@ -15,7 +15,7 @@ describe('TESTING',
         INPUT: Path.resolve('.') + '/src/components/**/*',
         DB_PATH: Path.resolve('.') + '/src/tests/test1',
         PORT: port,
-        DEBUG:true
+        DEBUG: true
       })
     })
     let userInserted: User
@@ -26,7 +26,8 @@ describe('TESTING',
           name:"Roy",
           lastname:"Alcala",
           email:"alcala.rao@gmail.com",
-          phone:"4491862098"
+          phone:"4491862098",
+          password:"my password"
         }){
           _id
           name
@@ -34,7 +35,7 @@ describe('TESTING',
       }
       `
       userInserted = (await fetch.request(endpoint, query)).UserInsert
-      console.log({userInserted})
+      console.log({ userInserted })
       // console.log(userInserted)
       expect(typeof userInserted._id).to.equal('string');
     })
@@ -51,7 +52,7 @@ describe('TESTING',
           }
 }
       `
-      const response = await fetch.request(endpoint, query)      
+      const response = await fetch.request(endpoint, query)
       expect(true).to.equal(true);
     })
 
