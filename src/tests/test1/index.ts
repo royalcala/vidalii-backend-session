@@ -34,7 +34,8 @@ describe('TESTING',
       }
       `
       userInserted = (await fetch.request(endpoint, query)).UserInsert
-      console.log(userInserted)
+      console.log({userInserted})
+      // console.log(userInserted)
       expect(typeof userInserted._id).to.equal('string');
     })
     it('update  user', async () => {

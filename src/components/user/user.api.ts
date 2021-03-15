@@ -1,9 +1,8 @@
-import { api, Context, orm, val, getDataLoader } from "@vidalii/backend";
-import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
-import { AnyEntity, EntityName } from "@vidalii/backend/dist/vidalii.orm";
+import { api, Context, orm, val, getDataLoader, VidaliiService } from "@vidalii/backend";
 import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
-
+import { createBaseResolverFind, createBaseResolverInsert } from "../extendsCRUD";
+import { useMiddlewareExtends } from "../useMiddlewareExtends";
 
 
 @api.ObjectType()
@@ -27,11 +26,8 @@ export class User implements Partial<UserEntity>{
     async version(
         @api.Ctx() context: Context
     ) {
-        //TODO dataloader implementation getDataloder(id,context)
-        const dataLoader = getDataLoader(UserVersion, 'User.version', '_id_doc', context)
-        // const version = await context.em.findOne(UserVersion, this._id as any)
-        return dataLoader.load(this._id)
-        // return version
+        const userVersion = getDataLoader(UserVersion, 'User.version', '_id_doc', context)
+        return userVersion.load(this._id)
     }
 }
 
@@ -63,27 +59,56 @@ export class UserUpdate implements Omit<UserEntity, '_id'>{
 
 
 
-@api.Resolver(User)
-export class UserResolver {
-    @api.Query(returns => [User])
-    async UserFind(
-        @api.Arg('operators', () => JsonScalar)
-        operators: Object,
-        @api.Ctx() context: Context
-    ) {
+@api.Resolver(of => User)
+class UserFind extends createBaseResolverFind('User', User, UserEntity) { }
 
-        return context.em.find(UserEntity, operators)
+@api.Resolver(of => User)
+class UserInsert extends createBaseResolverInsert(
+    User, 'user', UserEntity,
+    (persist, userInput) => {
+        persist()
+        //TODO create middleware in separate file for add version insert1   
+        return userInput
     }
-    @api.Mutation(returns => User)
-    async UserInsert(
-        @api.Arg("user", { validate: true }) user: UserEntity,
-        @api.Ctx() context: Context
-    ) {
-        context.em.persist(user)
-        //TODO id_session_HERE
-        UserVersion.insert(user._id, 'id_session_HERE', context)
-        return user
-    }
+) { }
+VidaliiService.api.addResolversComposition('Mutation.UserInsert', [next => async (root, args, context: Context, info) => {
+    const user = new UserEntity()
+    UserVersion.insert(user._id, 'id_session_HERE', context)
+    return next(root, args, context, info)
+}])
+
+// const UserVersionInsert: api.MiddlewareFn<Context> = ({ args, context, info }, next) => {
+//     console.log('helllllllllllllllllllllllloww**********************')
+//     const user = args as UserEntity
+//     UserVersion.insert(user._id, 'id_session_HERE', context)
+//     return next();
+// };
+
+
+// useMiddlewareExtends(UserInsert, [UserVersionInsert])
+
+
+@api.Resolver(of => User)
+export class UserResolver {
+    // @api.Query(returns => [UseUserVersion.insert(user._id, 'id_session_HERE', context)r])
+    // async UserFind(
+    //     @api.Arg('operators', () => JsonScalar)
+    //     operators: Object,
+    //     @api.Ctx() context: Context
+    // ) {
+
+    //     return context.em.find(UserEntity, operators)
+    // }
+    // @api.Mutation(returns => User)
+    // async UserInsert(
+    //     @api.Arg("user", { validate: true }) user: UserEntity,
+    //     @api.Ctx() context: Context
+    // ) {
+    //     context.em.persist(user)
+    //     //TODO id_session_HERE
+    //     UserVersion.insert(user._id, 'id_session_HERE', context)
+    //     return user
+    // }
 
     @api.Mutation(returns => User)
     async UserUpdate(

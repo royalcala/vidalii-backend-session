@@ -5,17 +5,12 @@ import { session as SessionEntity } from "./session.entity";
 @api.ObjectType()
 export class Session implements Partial<SessionEntity>{
     @api.Field(type => String)
-    _id: String;
+    _id: string;
 
-    @api.Field()
-    name: String;
+    @api.Field(type => String)
+    id_user: string
 
-    @api.Field()
-    lastname: String
+    time_login: number
 
-    @api.Field()
-    email: String;
-
-    @api.Field()
-    phone: String
+    time_logout: number
 }

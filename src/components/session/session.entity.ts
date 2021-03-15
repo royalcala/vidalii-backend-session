@@ -5,7 +5,7 @@ import { orm, api, val, ObjectId } from "@vidalii/backend";
 @orm.Entity()
 export class session {
     @orm.PrimaryKey()
-    _id: String = new ObjectId().toHexString()
+    _id: string = new ObjectId().toHexString()
 
     @val.MaxLength(20, {
         message: 'name is too big',

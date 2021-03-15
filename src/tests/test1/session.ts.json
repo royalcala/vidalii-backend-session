@@ -6,7 +6,7 @@
         "name": "_id",
         "reference": "scalar",
         "primary": true,
-        "type": "String"
+        "type": "string"
       },
       "name": {
         "name": "name",
@@ -21,7 +21,7 @@
         "name": "_id",
         "reference": "scalar",
         "primary": true,
-        "type": "String"
+        "type": "string"
       },
       {
         "name": "name",
@@ -50,6 +50,6 @@
     "collection": "session"
   },
   "origin": "./src/components/session/session.entity.ts",
-  "hash": "462c8e3895e88584e48e5189e2d22f5d",
+  "hash": "702926ca04ec133c50130d95bcbbd282",
   "version": "4.4.4"
 }

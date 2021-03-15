@@ -31,7 +31,7 @@ export class Version {
         context.em.persist(version)
     }
     static update(_id_doc: String, id_cuser_udpated: String, context: Context) {
-        
+
     }
 }
 
