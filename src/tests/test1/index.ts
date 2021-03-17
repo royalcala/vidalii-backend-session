@@ -17,12 +17,30 @@ describe('TESTING',
         PORT: port,
         DEBUG: true
       })
-    })
+    }).timeout(5000)
+    // it('login', async () => {
+    //   const query = fetch.gql`#graphql
+    //   mutation Login{
+    //     SessionLogin(
+    //       {
+    //         email:"admin@vidalii.com",
+    //         password:"admin"
+    //       },
+
+    //     )
+    //   }
+    //   `
+    //   let sessionLogin = (await fetch.request(endpoint, query))?.SessionLogin
+    //   console.log({ sessionLogin })
+    //   // expect(typeof userInserted._id).to.equal('string');
+
+    // })
+
     let userInserted: User
     it('insert new user', async () => {
       const query = fetch.gql`#graphql
-      mutation UserInsert{
-        UserInsert(user:{
+      mutation userInsert{
+        userInsert(user:{
           name:"Roy",
           lastname:"Alcala",
           email:"alcala.rao@gmail.com",
@@ -34,7 +52,7 @@ describe('TESTING',
         }
       }
       `
-      userInserted = (await fetch.request(endpoint, query)).UserInsert
+      userInserted = (await fetch.request(endpoint, query))?.userInsert
       console.log({ userInserted })
       // console.log(userInserted)
       expect(typeof userInserted._id).to.equal('string');
@@ -42,7 +60,7 @@ describe('TESTING',
     it('update  user', async () => {
       const query = fetch.gql`#graphql
      mutation userUpdate{
-        UserUpdate(
+        userUpdate(
           _id:\"${userInserted._id}\",
           user:{
           name:"rao updated"

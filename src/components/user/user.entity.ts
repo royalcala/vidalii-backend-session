@@ -1,19 +1,28 @@
 import { orm, api, val, ObjectId } from "@vidalii/backend";
+import { hash } from "./user.password.lib";
 
 
 @api.InputType('UserInsert')
 @orm.Entity()
 export class user {
+    async pre_persist() {
+        this._id = new ObjectId().toHexString()
+        this.password = await hash(this.password)
+        return this
+    }
     @orm.PrimaryKey()
-    _id: string = new ObjectId().toHexString()
+    _id: string
 
     @val.MaxLength(20, {
-        message: 'name is too big',
+        message: 'the max size is 20.',
     })
     @api.Field({ nullable: false })
     @orm.Property()
     name: string
 
+    @val.MaxLength(20, {
+        message: 'the max size is 20.',
+    })
     @api.Field({ nullable: false })
     @orm.Property()
     lastname: string
@@ -28,8 +37,7 @@ export class user {
     @orm.Property()
     phone: string
 
-    // @val.IsHash()
     @api.Field({ nullable: false })
     @orm.Property()
-    password: string
+    password: string    
 }

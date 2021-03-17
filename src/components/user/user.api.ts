@@ -2,7 +2,7 @@ import { api, Context, orm, val, getDataLoader, VidaliiService } from "@vidalii/
 import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
 import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
-import { hash } from "./user.password";
+
 @api.ObjectType()
 export class User implements Partial<UserEntity>{
     @api.Field(type => String)
@@ -31,7 +31,7 @@ export class User implements Partial<UserEntity>{
 
 
 @api.InputType()
-export class UserUpdate implements Omit<UserEntity, '_id'>{
+export class UserUpdate{
 
     @val.MaxLength(20, {
         message: 'name is too big',
@@ -53,15 +53,12 @@ export class UserUpdate implements Omit<UserEntity, '_id'>{
     @val.IsPhoneNumber('MX', { message: `Your phone number is incorrect` })
     @api.Field({ nullable: true })
     phone: string
-
-    //TODO check validation of password
-    password: string
 }
 
 @api.Resolver(of => User)
 export class UserResolver {
     @api.Query(returns => [User])
-    async UserFind(
+    async userFind(
         @api.Arg('operators', () => JsonScalar)
         operators: Object,
         @api.Ctx() context: Context
@@ -70,17 +67,17 @@ export class UserResolver {
         return context.em.find(UserEntity, operators)
     }
     @api.Mutation(returns => User)
-    async UserInsert(
+    async userInsert(
         @api.Arg("user", { validate: true }) user: UserEntity,
         @api.Ctx() context: Context
     ) {
-        user.password = await hash(user.password)
+        await user.pre_persist()
         context.em.persist(user)
         return user
     }
 
-    @api.Mutation(returns => User)
-    async UserUpdate(
+    @api.Mutation(returns => User)    
+    async userUpdate(
         @api.Arg("_id") _id: string,
         @api.Arg("user", { validate: true }) userUpdate: UserUpdate,
         @api.Ctx() context: Context

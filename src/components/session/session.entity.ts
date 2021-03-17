@@ -4,13 +4,13 @@ import { orm, api, val, ObjectId } from "@vidalii/backend";
 
 @orm.Entity()
 export class session {
-    login(id_user) {
+    prePersist_login(id_user) {
         this._id = new ObjectId().toHexString()
         this.id_user = id_user
         this.time_login = new Date().getTime()
         return this
     }
-    logout(_id) {
+    prePersist_logout(_id) {
 
     }
     @orm.PrimaryKey()

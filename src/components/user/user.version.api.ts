@@ -14,8 +14,8 @@ const resolverUserVersionInsert = next => async (root, args, context: Context, i
 VidaliiService.api.addResolversComposition('Mutation.UserInsert', [resolverUserVersionInsert])
 
 @api.Resolver(of => User)
-class UserVersionResolver {
-    @api.FieldResolver()
+export class UserVersionResolver {
+    @api.FieldResolver(returnType => UserVersion)    
     async version(
         @api.Root() user: User,
         @api.Ctx() context: Context
@@ -24,4 +24,3 @@ class UserVersionResolver {
         return userVersion.load(user._id)
     }
 }
-

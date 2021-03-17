@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/mocha": "^8.2.1",
     "chai": "^4.3.3",
     "mocha": "^8.3.1",

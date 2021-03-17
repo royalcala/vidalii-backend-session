@@ -1,0 +1,55 @@
+{
+  "data": {
+    "propertyOrder": {},
+    "properties": {
+      "_id": {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "string"
+      },
+      "name": {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      }
+    },
+    "props": [
+      {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "string"
+      },
+      {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      }
+    ],
+    "primaryKeys": [
+      "_id"
+    ],
+    "filters": {},
+    "hooks": {},
+    "indexes": [],
+    "uniques": [],
+    "className": "UserGroup",
+    "path": "./src/components/user/user.group.entity.ts",
+    "name": "UserGroup",
+    "abstract": false,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "useCache": true,
+    "compositePK": false,
+    "relations": [],
+    "collection": "user_group"
+  },
+  "origin": "./src/components/user/user.group.entity.ts",
+  "hash": "690bd120bc4068d2901e109fe53a782d",
+  "version": "4.4.4"
+}

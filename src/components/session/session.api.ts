@@ -2,9 +2,10 @@ import { api, Context, val } from "@vidalii/backend";
 import { User } from "../user/user.api";
 import { user as UserEntity } from "../user/user.entity";
 import { session as SessionEntity } from "./session.entity";
-import { verifyPassword } from "../user/user.password";
+import { verifyPassword } from "../user/user.password.lib";
 import jwt from "jsonwebtoken";
-import { SECRET, TOKEN } from "./context.api";
+import { SECRET, TOKEN } from "./auth.api";
+import { usergroup } from "../user/user.group.entity";
 
 
 @api.ObjectType()
@@ -39,7 +40,7 @@ export class CredentialInput {
 @api.Resolver(of => Session)
 export class SessionResolvers {
 
-    @api.Mutation(returns => User)
+    @api.Mutation(returns => String)
     async SessionLogin(
         @api.Arg('credential', { validate: true }) credential: CredentialInput,
         @api.Ctx() context: Context
@@ -50,18 +51,23 @@ export class SessionResolvers {
         if (passwordCorrect === false)
             throw new Error(`Password incorrect`)
 
-        const sessionEntity = new SessionEntity().login(user._id)
+        const groups = (await context.em.find(usergroup, { id_user: user._id }))
+            .map(
+                (value) => value.id_group
+            )
+        const sessionEntity = new SessionEntity().prePersist_login(user._id)
         context.em.persist(sessionEntity)
-        //@ts-ignore
-        user.token = jwt.sign(
+
+        const token = jwt.sign(
             {
-                _id_user: user._id
+                _id_user: user._id,
+                groups,
             } as TOKEN,
             SECRET,
             { expiresIn: '1d' }
         )
 
-        return user
+        return token
 
     }
 
