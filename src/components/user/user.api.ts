@@ -2,7 +2,7 @@ import { api, Context, orm, val, getDataLoader, VidaliiService } from "@vidalii/
 import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
 import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
-
+import { Auth } from "../session/auth.decorator.api";
 @api.ObjectType()
 export class User implements Partial<UserEntity>{
     @api.Field(type => String)
@@ -31,7 +31,7 @@ export class User implements Partial<UserEntity>{
 
 
 @api.InputType()
-export class UserUpdate{
+export class UserUpdate {
 
     @val.MaxLength(20, {
         message: 'name is too big',
@@ -76,7 +76,8 @@ export class UserResolver {
         return user
     }
 
-    @api.Mutation(returns => User)    
+    @api.Mutation(returns => User)
+    @Auth.Mutation(['admin'])
     async userUpdate(
         @api.Arg("_id") _id: string,
         @api.Arg("user", { validate: true }) userUpdate: UserUpdate,

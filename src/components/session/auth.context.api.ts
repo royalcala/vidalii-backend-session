@@ -1,7 +1,7 @@
-import { Context, VidaliiService, api } from "@vidalii/backend";
+import { VidaliiService } from "@vidalii/backend";
 import jwt from "jsonwebtoken";
 import { AuthenticationError } from "@vidalii/backend/dist/vidalii.server.apollo";
-
+import { GUEST } from "../user/user.entity.init";
 
 //TODO define how to save SECRET
 export const SECRET = 'mySECRET'
@@ -10,7 +10,7 @@ export type TOKEN = {
     groups: string[]
 }
 
-export type ContextWithSession = Context | {
+export type ContextSession = {
     session: TOKEN
 }
 
@@ -21,25 +21,19 @@ VidaliiService.server.addContext(
         if (auth !== null) {
             const token = auth.split('Bearer ')[1];
             // if (!token) throw new AuthenticationError('you should provide a token');
-            const dataToken: TOKEN = await jwt.verify(token, SECRET, (err, decoded) => {
+            const dataToken = await jwt.verify(token, SECRET, (err, decoded) => {
                 if (err) throw new AuthenticationError('invalid token!');
-                return decoded;
-            })
+                return decoded
+            }) as any as TOKEN
             return {
                 session: dataToken
-            } as ContextWithSession
+            } as ContextSession
         }
         else
-            return {}
+            return {
+                session: { _id_user: 'guest', groups: [GUEST] }
+            }
 
 
     }
 )
-
-export const Auth: api.MiddlewareFn = async ({ info }, next) => {
-
-    // const start = Date.now();
-    // await next();
-    // const resolveTime = Date.now() - start;
-    // console.log(`${info.parentType.name}.${info.fieldName} [${resolveTime} ms]`);
-}

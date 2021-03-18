@@ -4,7 +4,7 @@ import { user as UserEntity } from "../user/user.entity";
 import { session as SessionEntity } from "./session.entity";
 import { verifyPassword } from "../user/user.password.lib";
 import jwt from "jsonwebtoken";
-import { SECRET, TOKEN } from "./auth.api";
+import { SECRET, TOKEN } from "./auth.context.api";
 import { usergroup } from "../user/user.group.entity";
 
 
