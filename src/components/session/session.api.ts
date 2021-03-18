@@ -41,7 +41,7 @@ export class CredentialInput {
 export class SessionResolvers {
 
     @api.Mutation(returns => String)
-    async SessionLogin(
+    async sessionLogin(
         @api.Arg('credential', { validate: true }) credential: CredentialInput,
         @api.Ctx() context: Context
     ) {
@@ -71,7 +71,7 @@ export class SessionResolvers {
     }
 
     @api.Mutation(returns => Session)
-    SessionLogout(
+    sessionLogout(
         @api.Arg('session_id', () => String) session: string,
         @api.Ctx() context: Context
     ) {

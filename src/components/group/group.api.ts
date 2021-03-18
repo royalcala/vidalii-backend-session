@@ -1,5 +1,6 @@
 import { api, getDataLoader, Context } from "@vidalii/backend"
 import { JsonScalar } from "@vidalii/backend/dist/scalars/Json"
+import { Auth } from "../session/session.decorator.api";
 import { User } from "../user/user.api"
 import { usergroup } from "./group.entity"
 import { Groups } from "./group.enum.api";
@@ -8,11 +9,13 @@ export class UserGroupResolver {
 
     //QUERY
     @api.Query(returnType => [Groups])
+    @Auth.Query([Groups.admin])
     groupList() {
         return Object.values(Groups)
     }
 
     @api.FieldResolver(returnType => [Groups])
+    @Auth.Query([Groups.admin])
     async groups(
         @api.Root() user: User,
         @api.Ctx() context: Context

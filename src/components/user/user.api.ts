@@ -68,6 +68,7 @@ export class UserResolver {
         return context.em.find(UserEntity, operators)
     }
     @api.Mutation(returns => User)
+    @Auth.Mutation([Groups.admin])
     async userInsert(
         @api.Arg("user", { validate: true }) user: UserEntity,
         @api.Ctx() context: Context
@@ -78,7 +79,7 @@ export class UserResolver {
     }
 
     @api.Mutation(returns => User)
-    // @Auth.Mutation([Groups.admin])
+    @Auth.Mutation([Groups.admin])
     async userUpdate(
         @api.Arg("_id") _id: string,
         @api.Arg("user", { validate: true }) userUpdate: UserUpdate,

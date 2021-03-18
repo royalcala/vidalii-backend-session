@@ -18,66 +18,73 @@ describe('TESTING',
         DEBUG: true
       })
     }).timeout(5000)
-    // it('login', async () => {
-    //   const query = fetch.gql`#graphql
-    //   mutation Login{
-    //     SessionLogin(
-    //       {
-    //         email:"admin@vidalii.com",
-    //         password:"admin"
-    //       },
+    let graphQLClient: fetch.GraphQLClient
+    it('sigin', async () => {
+      const query = fetch.gql`#graphql
+          mutation Login{
+              sessionLogin(credential:{
+                email:"admin@vidalii.com",
+                password:"admin"
+                })
+        }
+      `
+      let token = (await fetch.request(endpoint, query))?.sessionLogin
+      console.log({ token })
+      graphQLClient = new fetch.GraphQLClient(endpoint, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
 
-    //     )
-    //   }
-    //   `
-    //   let sessionLogin = (await fetch.request(endpoint, query))?.SessionLogin
-    //   console.log({ sessionLogin })
-    //   // expect(typeof userInserted._id).to.equal('string');
-
-    // })
+      expect(typeof token).to.equal('string');
+    })
 
     let userInserted: User
     it('insert new user', async () => {
       const query = fetch.gql`#graphql
-      mutation userInsert{
-        userInsert(user:{
-          name:"Roy",
-          lastname:"Alcala",
-          email:"alcala.rao@gmail.com",
-          phone:"4491862098",
-          password:"my password"
-        }){
+      mutation userInsert($user:UserInsert){
+        userInsert(user:$user){
           _id
           name
         }
       }
       `
-      userInserted = (await fetch.request(endpoint, query))?.userInsert
+      const variables = {
+        user: {
+          name: "Roy",
+          lastname: "Alcala",
+          email: "alcala.rao@gmail.com",
+          phone: "4491862098",
+          password: "my password"
+        },
+      }
+
+      userInserted = (await graphQLClient.request(query, variables))?.userInsert
       console.log({ userInserted })
       // console.log(userInserted)
       expect(typeof userInserted._id).to.equal('string');
     })
-    it('update  user', async () => {
-      const query = fetch.gql`#graphql
-     mutation userUpdate{
-        userUpdate(
-          _id:\"${userInserted._id}\",
-          user:{
-          name:"rao updated"
-        }){
-            _id
-            name
-          }
-}
-      `
-      const response = await fetch.request(endpoint, query)
-      expect(true).to.equal(true);
-    })
+        it('update  user', async () => {
+          const query = fetch.gql`#graphql
+         mutation userUpdate{
+            userUpdate(
+              _id:\"${userInserted._id}\",
+              user:{
+              name:"rao updated"
+            }){
+                _id
+                name
+              }
+    }
+          `
+          const response = await graphQLClient.request(query)
+          expect(true).to.equal(true);
+        })
 
-    it('sigin user', async () => {
+    //     it('sigin user', async () => {
 
 
-    })
+    //     })
 
     // after(async function () {
     //   await VidaliiService.stop()
