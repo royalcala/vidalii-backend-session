@@ -2,65 +2,42 @@
   "data": {
     "propertyOrder": {},
     "properties": {
-      "_id": {
-        "name": "_id",
+      "id_user": {
+        "name": "id_user",
         "reference": "scalar",
         "primary": true,
         "type": "string"
       },
-      "id_user": {
-        "name": "id_user",
+      "group": {
+        "name": "group",
         "reference": "scalar",
         "getter": false,
-        "setter": false,
-        "type": "string"
-      },
-      "id_group": {
-        "name": "id_group",
-        "reference": "scalar",
-        "getter": false,
-        "setter": false,
-        "type": "string"
+        "setter": false
       }
     },
     "props": [
       {
-        "name": "_id",
+        "name": "id_user",
         "reference": "scalar",
         "primary": true,
         "type": "string"
       },
       {
-        "name": "id_user",
+        "name": "group",
         "reference": "scalar",
         "getter": false,
-        "setter": false,
-        "type": "string"
-      },
-      {
-        "name": "id_group",
-        "reference": "scalar",
-        "getter": false,
-        "setter": false,
-        "type": "string"
+        "setter": false
       }
     ],
     "primaryKeys": [
-      "_id"
+      "id_user"
     ],
     "filters": {},
     "hooks": {},
-    "indexes": [
-      {
-        "properties": "id_user"
-      },
-      {
-        "properties": "id_group"
-      }
-    ],
+    "indexes": [],
     "uniques": [],
     "className": "usergroup",
-    "path": "./src/components/user/user.group.entity.ts",
+    "path": "./src/components/group/group.entity.ts",
     "name": "usergroup",
     "abstract": false,
     "constructorParams": [],
@@ -70,7 +47,7 @@
     "relations": [],
     "collection": "usergroup"
   },
-  "origin": "./src/components/user/user.group.entity.ts",
-  "hash": "f33278b70aefa0b5a9827714080aa2bf",
+  "origin": "./src/components/group/group.entity.ts",
+  "hash": "b6aa824ecd7bf02521f4385193b8b47f",
   "version": "4.4.4"
 }

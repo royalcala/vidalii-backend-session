@@ -4,8 +4,8 @@ import { user as UserEntity } from "../user/user.entity";
 import { session as SessionEntity } from "./session.entity";
 import { verifyPassword } from "../user/user.password.lib";
 import jwt from "jsonwebtoken";
-import { SECRET, TOKEN } from "./auth.context.api";
-import { usergroup } from "../user/user.group.entity";
+import { SECRET, TOKEN } from "./session.context.api";
+import { usergroup } from "../group/group.entity";
 
 
 @api.ObjectType()
@@ -45,16 +45,15 @@ export class SessionResolvers {
         @api.Arg('credential', { validate: true }) credential: CredentialInput,
         @api.Ctx() context: Context
     ) {
-        const user = await context.em.findOneOrFail(UserEntity, { email: credential.email })
+        const user = await context.em.findOne(UserEntity, { email: credential.email })
+        if (!user)
+            throw new Error(`Credentials incorrect.`)
 
         const passwordCorrect = await verifyPassword(credential.password, user.password)
         if (passwordCorrect === false)
-            throw new Error(`Password incorrect`)
+            throw new Error(`Credentials incorrect..`)
 
-        const groups = (await context.em.find(usergroup, { id_user: user._id }))
-            .map(
-                (value) => value.id_group
-            )
+        const groups = (await context.em.findOne(usergroup, { id_user: user._id })).group
         const sessionEntity = new SessionEntity().prePersist_login(user._id)
         context.em.persist(sessionEntity)
 

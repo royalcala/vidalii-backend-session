@@ -1,7 +1,7 @@
 import { VidaliiService } from "@vidalii/backend";
 import jwt from "jsonwebtoken";
 import { AuthenticationError } from "@vidalii/backend/dist/vidalii.server.apollo";
-import { GUEST } from "../user/user.entity.init";
+import { Groups } from "../group/group.enum.api";
 
 //TODO define how to save SECRET
 export const SECRET = 'mySECRET'
@@ -25,14 +25,15 @@ VidaliiService.server.addContext(
                 if (err) throw new AuthenticationError('invalid token!');
                 return decoded
             }) as any as TOKEN
+            // console.log({ dataToken })
             return {
                 session: dataToken
             } as ContextSession
         }
-        else
-            return {
-                session: { _id_user: 'guest', groups: [GUEST] }
-            }
+
+        return {
+            session: { _id_user: 'guest', groups: [Groups.guest] }
+        }
 
 
     }

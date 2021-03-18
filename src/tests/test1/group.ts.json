@@ -2,46 +2,28 @@
   "data": {
     "propertyOrder": {},
     "properties": {
-      "_id": {
-        "name": "_id",
-        "reference": "scalar",
-        "primary": true,
-        "type": "string"
-      },
       "name": {
         "name": "name",
         "reference": "scalar",
-        "getter": false,
-        "setter": false,
+        "primary": true,
         "type": "string"
       }
     },
     "props": [
       {
-        "name": "_id",
-        "reference": "scalar",
-        "primary": true,
-        "type": "string"
-      },
-      {
         "name": "name",
         "reference": "scalar",
-        "getter": false,
-        "setter": false,
+        "primary": true,
         "type": "string"
       }
     ],
     "primaryKeys": [
-      "_id"
+      "name"
     ],
     "filters": {},
     "hooks": {},
     "indexes": [],
-    "uniques": [
-      {
-        "properties": "name"
-      }
-    ],
+    "uniques": [],
     "className": "group",
     "path": "./src/components/user/user.group.entity.ts",
     "name": "group",
@@ -54,6 +36,6 @@
     "collection": "group"
   },
   "origin": "./src/components/user/user.group.entity.ts",
-  "hash": "f33278b70aefa0b5a9827714080aa2bf",
+  "hash": "c1c395adc0c6e9d59c800c27876fdd59",
   "version": "4.4.4"
 }

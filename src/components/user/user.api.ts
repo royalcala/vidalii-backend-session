@@ -2,7 +2,7 @@ import { api, Context, orm, val, getDataLoader, VidaliiService } from "@vidalii/
 import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
 import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
-import { Auth } from "../session/auth.decorator.api";
+import { Auth, Groups } from "../session/session.decorator.api";
 @api.ObjectType()
 export class User implements Partial<UserEntity>{
     @api.Field(type => String)
@@ -58,12 +58,13 @@ export class UserUpdate {
 @api.Resolver(of => User)
 export class UserResolver {
     @api.Query(returns => [User])
+    @Auth.Query([Groups.admin])
     async userFind(
         @api.Arg('operators', () => JsonScalar)
         operators: Object,
         @api.Ctx() context: Context
     ) {
-
+        console.log({ context })
         return context.em.find(UserEntity, operators)
     }
     @api.Mutation(returns => User)
@@ -77,7 +78,7 @@ export class UserResolver {
     }
 
     @api.Mutation(returns => User)
-    @Auth.Mutation(['admin'])
+    // @Auth.Mutation([Groups.admin])
     async userUpdate(
         @api.Arg("_id") _id: string,
         @api.Arg("user", { validate: true }) userUpdate: UserUpdate,
