@@ -20,7 +20,8 @@ export class UserGroupResolver {
         @api.Root() user: User,
         @api.Ctx() context: Context
     ) {
-        return context.em.findOne(usergroup, { id_user: user._id })
+        const group = await context.em.findOne(usergroup, { id_user: user._id })
+        return group.group
         //one to many
         // const groups = (await context.em.find(usergroup, { id_user: user._id }))
         //     .map(

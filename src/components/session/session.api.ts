@@ -26,30 +26,21 @@ export class Session implements Partial<SessionEntity>{
     token: string
 }
 
-@api.InputType()
-export class CredentialInput {
-
-    @api.Field({ nullable: false })
-    @val.IsEmail()
-    email: string
-
-    @api.Field({ nullable: false })
-    password: string
-}
 
 @api.Resolver(of => Session)
 export class SessionResolvers {
 
     @api.Mutation(returns => String)
     async sessionLogin(
-        @api.Arg('credential', { validate: true }) credential: CredentialInput,
+        @api.Arg('username') email: string,
+        @api.Arg('password') password: string,
         @api.Ctx() context: Context
     ) {
-        const user = await context.em.findOne(UserEntity, { email: credential.email })
+        const user = await context.em.findOne(UserEntity, { email })
         if (!user)
             throw new Error(`Credentials incorrect.`)
 
-        const passwordCorrect = await verifyPassword(credential.password, user.password)
+        const passwordCorrect = await verifyPassword(password, user.password)
         if (passwordCorrect === false)
             throw new Error(`Credentials incorrect..`)
 
@@ -57,7 +48,7 @@ export class SessionResolvers {
         const sessionEntity = new SessionEntity().prePersist_login(user._id)
         context.em.persist(sessionEntity)
 
-        const token = jwt.sign(
+        const token = 'Bearer ' + jwt.sign(
             {
                 _id_user: user._id,
                 groups,
@@ -70,12 +61,13 @@ export class SessionResolvers {
 
     }
 
-    @api.Mutation(returns => Session)
-    sessionLogout(
-        @api.Arg('session_id', () => String) session: string,
-        @api.Ctx() context: Context
-    ) {
-        // const session = await context.em.
+    // @api.Mutation(returns => Session)
+    // sessionLogout(
+    //     @api.Arg('session_id', () => String) id_user: string,
+    //     @api.Ctx() context: Context
+    // ) {
+    //     //TODO destroy token on client
+    //     new SessionEntity().prePersist_logout()
 
-    }
+    // }
 }

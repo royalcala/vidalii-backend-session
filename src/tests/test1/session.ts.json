@@ -23,14 +23,6 @@
         "setter": false,
         "type": "number",
         "nullable": true
-      },
-      "time_logout": {
-        "name": "time_logout",
-        "reference": "scalar",
-        "getter": false,
-        "setter": false,
-        "type": "number",
-        "nullable": true
       }
     },
     "props": [
@@ -50,14 +42,6 @@
       },
       {
         "name": "time_login",
-        "reference": "scalar",
-        "getter": false,
-        "setter": false,
-        "type": "number",
-        "nullable": true
-      },
-      {
-        "name": "time_logout",
         "reference": "scalar",
         "getter": false,
         "setter": false,
@@ -88,6 +72,6 @@
     "collection": "session"
   },
   "origin": "./src/components/session/session.entity.ts",
-  "hash": "a9a2bda0f9ee875f2fec697f9b4b0cac",
+  "hash": "3b60eb78c49e1230ed97588d928015bd",
   "version": "4.4.4"
 }

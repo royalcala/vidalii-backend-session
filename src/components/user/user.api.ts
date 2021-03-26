@@ -3,6 +3,7 @@ import { user as UserEntity } from "./user.entity";
 import { UserVersion } from "./user.version.entity";
 import { JsonScalar } from "@vidalii/backend/dist/scalars/Json";
 import { Auth, Groups } from "../session/session.decorator.api";
+import { ContextSession } from "../session/session.context.api";
 @api.ObjectType()
 export class User implements Partial<UserEntity>{
     @api.Field(type => String)
@@ -57,18 +58,28 @@ export class UserUpdate {
 
 @api.Resolver(of => User)
 export class UserResolver {
+
+    @api.Query(returns => User)
+    async userGetMyUser(
+        @api.Ctx() context: ContextSession
+    ) {
+        const _id = context.session._id_user
+        const user = await context.em.findOne(UserEntity, _id)
+        return user
+    }
+
+
     @api.Query(returns => [User])
-    @Auth.Query([Groups.admin])
+    // @Auth.Query([Groups.admin])
     async userFind(
         @api.Arg('operators', () => JsonScalar)
         operators: Object,
         @api.Ctx() context: Context
     ) {
-        console.log({ context })
         return context.em.find(UserEntity, operators)
     }
     @api.Mutation(returns => User)
-    @Auth.Mutation([Groups.admin])
+    // @Auth.Mutation([Groups.admin])
     async userInsert(
         @api.Arg("user", { validate: true }) user: UserEntity,
         @api.Ctx() context: Context
@@ -79,7 +90,7 @@ export class UserResolver {
     }
 
     @api.Mutation(returns => User)
-    @Auth.Mutation([Groups.admin])
+    // @Auth.Mutation([Groups.admin])
     async userUpdate(
         @api.Arg("_id") _id: string,
         @api.Arg("user", { validate: true }) userUpdate: UserUpdate,
@@ -91,4 +102,20 @@ export class UserResolver {
         const newOne = orm.wrap(prevData).assign(userUpdate)
         return newOne
     }
+
+    @api.Mutation(returns => User)
+    // @Auth.Mutation([Groups.admin])
+    async userUpdateMyAccount(
+        @api.Arg("user", { validate: true, nullable: false }) userUpdate: UserUpdate,
+        @api.Ctx() context: ContextSession
+    ) {
+        const _id = context.session._id_user
+        const prevData = await context.em.findOne(UserEntity, _id)
+        if (prevData === null)
+            throw new Error(`The _id:${_id}, doesnt exist on database`)
+        const newOne = orm.wrap(prevData).assign(userUpdate)
+        return newOne
+    }
+
+
 }

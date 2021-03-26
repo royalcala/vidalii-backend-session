@@ -22,17 +22,17 @@ describe('TESTING',
     it('sigin', async () => {
       const query = fetch.gql`#graphql
           mutation Login{
-              sessionLogin(credential:{
-                email:"admin@vidalii.com",
+              sessionLogin(
+                username:"admin@vidalii.com",
                 password:"admin"
-                })
+                )
         }
       `
       let token = (await fetch.request(endpoint, query))?.sessionLogin
       console.log({ token })
       graphQLClient = new fetch.GraphQLClient(endpoint, {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization:token,
         },
       })
 

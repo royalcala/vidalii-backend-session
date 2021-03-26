@@ -10,9 +10,10 @@ export class session {
         this.time_login = new Date().getTime()
         return this
     }
-    prePersist_logout(_id) {
-
-    }
+    // prePersist_logout(_id_user) {
+    //     this.id_user = _id_user
+    //     this.time_logout = new Date().getTime()
+    // }
     @orm.PrimaryKey()
     _id: string
 
@@ -23,7 +24,7 @@ export class session {
     @orm.Property()
     time_login?: number
 
-    @orm.Property()
-    time_logout?: number
+    // @orm.Property()
+    // time_logout?: number
 
 }

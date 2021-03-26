@@ -1,4 +1,4 @@
-import { VidaliiService } from "@vidalii/backend";
+import { Context, VidaliiService } from "@vidalii/backend";
 import jwt from "jsonwebtoken";
 import { AuthenticationError } from "@vidalii/backend/dist/vidalii.server.apollo";
 import { Groups } from "../group/group.enum.api";
@@ -10,7 +10,7 @@ export type TOKEN = {
     groups: string[]
 }
 
-export type ContextSession = {
+export interface ContextSession extends Context {
     session: TOKEN
 }
 
@@ -25,7 +25,7 @@ VidaliiService.server.addContext(
                 if (err) throw new AuthenticationError('invalid token!');
                 return decoded
             }) as any as TOKEN
-            // console.log({ dataToken })
+            console.log({ dataToken })
             return {
                 session: dataToken
             } as ContextSession
