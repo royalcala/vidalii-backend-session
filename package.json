@@ -1,9 +1,14 @@
 {
+  "vidalii": {},
   "name": "@vidalii/backend-session",
   "version": "1.0.0",
   "description": "",
+  "files": [
+    "src/Session"
+  ],
   "main": "index.js",
   "scripts": {
+    "components:extract":"components extract",
     "test:1": "mocha -r ts-node/register ./src/tests/test1/index.ts",
     "nodemon:test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'npm run test:1'"
   },
@@ -23,8 +28,9 @@
     "url": "https://github.com/royalcala/vidalii-backend-session/issues"
   },
   "homepage": "https://github.com/royalcala/vidalii-backend-session#readme",
-  "dependencies": {
+  "dependencies": {    
     "@vidalii/backend": "^0.0.25",
+    "@vidalii/version-backend": "^1.0.0",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {

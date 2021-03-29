@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { VidaliiService, fetch } from "@vidalii/backend";
 import Path from "path";
-import { User } from "../../components/user/user.api";
+import { User } from "../../components/Session/user/user.api";
 const host = 'localhost'
 const port = 4009
 const endpoint = `http://${host}:${port}/graphql`
